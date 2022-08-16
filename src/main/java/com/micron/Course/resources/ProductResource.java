@@ -13,7 +13,7 @@ import com.micron.Course.entities.Product;
 import com.micron.Course.services.ProductService;
 
 @RestController
-@RequestMapping(value = "/Products")
+@RequestMapping(value = "/products")
 public class ProductResource {
 	@Autowired
 	private ProductService service;
