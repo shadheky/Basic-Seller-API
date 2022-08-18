@@ -1,6 +1,7 @@
 package com.micron.Course.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -44,9 +45,15 @@ public class UserService {
 		
 	
 	public User update(Long id, User obj) {
-		User entity = repository.findById(id).get();
-		updateData(entity,obj);
-		return repository.save(entity);
+		try {
+			User entity = repository.findById(id).get();
+			updateData(entity,obj);
+			return repository.save(entity);
+			}
+		catch(NoSuchElementException e) {
+			
+			throw new ResourceNotFoundException(e.getMessage());
+		}
 	}
 
 	private void updateData(User entity, User obj) {
